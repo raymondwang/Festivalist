@@ -1,0 +1,14 @@
+<div class="temp-data">
+  <input type="hidden" id="user-location" value="<%= @current_user.ip_address %>">
+  <% @artists.each do |artist| %>
+    <input type="hidden" class="artist-name" value="<%= artist %>">
+  <% end %>
+</div>
+
+<h1 class="title events-title">Shows</h1>
+
+<div id="events">
+  <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
+</div>
+
+<%= javascript_include_tag 'events' %>

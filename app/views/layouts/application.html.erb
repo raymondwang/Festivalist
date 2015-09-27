@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Festivalist</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-flag"></span>estivalist</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if !session[:user_id] %>
+          <li><%= link_to 'Log in', '/auth/spotify' %></li>
+        <% else %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= User.find(session[:user_id]).username %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/playlists">Playlists</a></li>
+              <!-- <li><a href="#">Account</a></li> -->
+              <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+  <footer>
+    <h4>Developed and designed by <a href="http://raymondwang.me">Raymond Wang.</a></h4>
+  </footer>
+
+  <%= javascript_include_tag 'main' %>
+</body>
+</html>

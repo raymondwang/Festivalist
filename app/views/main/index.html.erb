@@ -1,0 +1,16 @@
+<div class="landing">
+  <div class="overlay">
+      <h2>You've got the perfect playlists.</h2>
+      <% if !session[:user_id] %>
+        <h2><a href="/auth/spotify">Ready to hear 'em live?</a></h2>
+      <% else %>
+        <h2><a href="/playlists">Let's hear 'em live.</a></h2>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('footer').css('display', 'none');
+  });
+</script>

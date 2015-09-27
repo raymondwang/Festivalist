@@ -1,0 +1,31 @@
+<h1 class="title">Playlists</h1>
+
+<div class="playlist-container">
+  <div class="row">
+    <% @playlists.each do |playlist| %>
+        <div class="col-sm-4">
+          <div class="playlist">
+            <form class="form playlist-form" action="/shows/<%= playlist.id %>" method="get">
+            <% if playlist.images.length > 1 %>
+              <img class="mosaic" src="<%= playlist.images[1]['url'] %>" alt="">
+            <!-- tries to load smaller images if possible, for performance -->
+            <% elsif playlist.images.length > 0 %>
+              <img class="mosaic" src="<%= playlist.images[0]['url'] %>" alt="">
+            <% else %>
+              <%= image_tag("empty_mosaic.png", class: "mosaic", alt: "") %>
+            <% end %>
+
+            <div class="playlist-details">
+              <p class="playlist-name"><%= playlist.name %></p>
+              <p class="playlist-owner"><%= playlist.owner.id %></p>
+            </div>
+
+            <input type="hidden" name="owner_id" value="<%= playlist.owner.id %>">
+          </form>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_include_tag 'playlists' %>

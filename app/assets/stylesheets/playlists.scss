@@ -1,0 +1,98 @@
+// defaults
+.playlist-container {
+  margin: 0 auto;
+  & > .row {
+
+    & .col-sm-4 > .playlist {
+      position: relative;
+      cursor: pointer;
+      margin: 30px auto;
+      & > form {
+        & > .mosaic {
+        }
+        & > .playlist-details {
+          padding: 8px;
+          background-color: $brightred;
+          color: white;
+          & > .playlist-name {
+            font-size: 16px;
+          }
+          & .playlist-owner {
+            position: absolute;
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// browser
+@media screen and (min-width: $breakpoint-sm) {
+  .playlist-container {
+
+    & > .row {
+
+      & .col-sm-4 > .playlist {
+        height: 300px;
+        text-align: center;
+        width: 200px;
+        & > form {
+          & > .mosaic {
+            height: 200px;
+          }
+          & > .playlist-details {
+            margin: 0 auto;
+            width: 200px;
+            height: 100px;
+
+            text-align: left;
+            & > .playlist-name {
+
+            }
+            & .playlist-owner {
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// mobile
+@media screen and (max-width: $breakpoint-xs) {
+  .playlist-container {
+    height: 75vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    & > .row {
+
+      & .col-sm-4 {
+        padding-left: 5%;
+        padding-right: 5%;
+        & > .playlist {
+          height: 150px;
+          & > form {
+            & > .mosaic {
+              position: absolute;
+              right: 0;
+              width: 150px;
+              height: 150px;
+            }
+            & > .playlist-details {
+              width: 100%;
+              height: 150px;
+              & > .playlist-name {
+                // probably temporary
+                position: relative;
+                z-index: 5;
+              }
+              & .playlist-owner {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
