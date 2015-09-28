@@ -44,7 +44,7 @@ class Showtime extends React.Component {
     var date = new Date(this.props.data.datetime).toString().split(' ');
 
     return <div className="datetime">
-      <a href={ url }>
+      <a href={ url } target="_blank">
         <p className="month">{ date[1] }</p>
         <p className="day">{ date[2] }</p>
       </a>
@@ -61,9 +61,9 @@ class Artist extends React.Component {
       {
         artists.map(function(artist) {
           if (artists[artists.length - 1] === artist) {
-            return <a href={ url }><span className="artist-name">{ artist.name }</span></a>
+            return <a href={ url } target="_blank"><span className="artist-name">{ artist.name }</span></a>
           } else {
-            return <a href={ url }><span className="artist-name">{ artist.name }, </span></a>
+            return <a href={ url } target="_blank"><span className="artist-name">{ artist.name }, </span></a>
           }
         })
       }
@@ -78,14 +78,14 @@ class Venue extends React.Component {
 
     if (venue.country == 'United States') {
       return <div className="venue">
-        <a href={ url }>
+        <a href={ url } target="_blank">
           <span className="venue-location">{ venue.city }, { venue.region }</span>
         </a>
           <span className="venue-name">{ venue.name }</span>
       </div>
     } else {
       return <div className="venue">
-        <a href={ url }>
+        <a href={ url } target="_blank">
           <span className="venue-location">{ venue.city }, { venue.country }</span>
         </a>
           <span className="venue-name">{ venue.name }</span>
@@ -98,11 +98,11 @@ class Tickets extends React.Component {
   render() {
     if (this.props.data.ticket_status === 'available') {
       return <div className="tickets available">
-        <a className="btn btn-default" href={ this.props.data.ticket_url }>Tickets</a>
+        <a className="btn btn-default" href={ this.props.data.ticket_url } target="_blank">Tickets</a>
       </div>
     } else {
       return <div className="tickets unavailable">
-        <a className="btn btn-default" href={ this.props.data.ticket_url }>Sold Out</a>
+        <a className="btn btn-default" href={ this.props.data.ticket_url } target="_blank">Sold Out</a>
       </div>
     }
   }
