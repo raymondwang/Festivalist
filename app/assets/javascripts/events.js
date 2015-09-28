@@ -33,7 +33,7 @@ function getArtists() {
 }
 
 function callBands(artists) {
-  var call = 'http://api.bandsintown.com/events/search?location=' + $('#user-location').val() + '&api_version=2.0&format=json&app_id=Festivalist';
+  var call = 'https://api.bandsintown.com/events/search?location=' + $('#user-location').val() + '&api_version=2.0&format=json&app_id=Festivalist';
 
   var promises = [];
 
