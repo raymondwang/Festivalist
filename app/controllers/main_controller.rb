@@ -2,7 +2,6 @@ class MainController < ApplicationController
   include SessionsHelper
 
   require 'rspotify'
-  RSpotify.authenticate(ENV['SPOTIFY_KEY'], ENV['SPOTIFY_SECRET'])
 
   def index
   end

@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
   require 'rspotify'
 
   def create
+    RSpotify.authenticate(ENV['SPOTIFY_KEY'], ENV['SPOTIFY_SECRET'])
+
     @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     spotify_hash = @spotify_user.to_hash
 
