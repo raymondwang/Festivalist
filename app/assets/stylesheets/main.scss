@@ -27,7 +27,7 @@ body {
     & > .navbar-brand {
       font-size: 24px;
       font-family: 'Berkshire Swash';
-      color: $brightred;
+      color: $logo-color;
 
       & > .glyphicon-flag {
         letter-spacing: -2px;
@@ -78,21 +78,23 @@ body {
   background-repeat: no-repeat;
 
   & > .overlay {
-    position: absolute;
-    top: 40px;
-    left: 4vw;
+    width: 50rem;
+    margin: 8vh auto;
     padding: 30px;
     border-radius: 30px;
-    background: linear-gradient(90deg, #FF512F 10%, #F09819 90%);
+    background: rgba(255, 197, 0, 0.75);
     color: white;
-    text-shadow: 3px 1px 5px black;
-    mix-blend-mode: multiply;
-    &:hover {
-      background: rgba(220,220,220, 0.8);
-      mix-blend-mode: normal;
-      color: $brightred;
-      text-shadow: 3px 1px 5px rgba(220,220,220, 0.8);
+    text-shadow: 3px 1px 5px #333333;
+
+    @media screen and (max-width: $breakpoint-xs) {
+      width: 345px;
+      margin: 10vh auto;
+      padding: 30px 8px;
+      & > h2 {
+        font-size: 24px;
+      }
     }
+
     & > h2:nth-child(2) {
       text-align: right;
       & > a {
@@ -116,6 +118,7 @@ footer {
   width: 100%;
   height: 60px;
   background-color: #434343;
+  mix-blend-mode: multiply;
   text-align: right;
   padding-right: 3rem;
   @media screen and (max-width: $breakpoint-xs) {

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/shows/:id' => 'main#events', as: :events
 
+  post '/users/location' => 'main#change_location'
+
   get '/auth/spotify/callback' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy', as: :logout
 

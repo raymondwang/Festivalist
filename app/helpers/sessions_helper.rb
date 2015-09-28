@@ -5,11 +5,7 @@ module SessionsHelper
     end
   end
 
-  def authenticate!
-    unless current_user
-      redirect_to root_path
-      # return false
-    end
-    # return true
+  def authenticate
+    RSpotify.authenticate(ENV['SPOTIFY_KEY'], ENV['SPOTIFY_SECRET'])
   end
 end

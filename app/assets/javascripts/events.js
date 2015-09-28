@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // now taking feedback on color schemes
-  $('body').css({'background': 'linear-gradient(90deg, #f857a6 10%, #ff5858 90%)'});
+  $('body').css({'background': 'linear-gradient(225deg, #f857a6 10%, #4776E6 33%, #B3FFAB 70%, #ff5858 90%)'});
 
   var artists = getArtists();
   var promises = callBands(artists);
@@ -90,6 +90,7 @@ function enableAutocomplete() {
 }
 
 function changeLocation(autocomplete) {
+  $('.popover').popover('hide');
   google.maps.event.clearInstanceListeners(autocomplete);
   var region = $('#location-input').val();
 
@@ -97,7 +98,15 @@ function changeLocation(autocomplete) {
 
   geocoder.geocode({'address': region}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
-      $('#user-location').val(results[0].geometry.location.H + ',' + results[0].geometry.location.L);
+      var location = results[0].geometry.location.H + ',' + results[0].geometry.location.L;
+
+      $.ajax({
+        type: 'post',
+        url: '/users/location',
+        data: {location: location}
+      });
+
+      $('#user-location').val(location);
 
       $('#events').empty();
       $('#events').css('textAlign', 'center');
@@ -105,7 +114,7 @@ function changeLocation(autocomplete) {
 
       renderPromises(callBands(getArtists()));
 
-      $('.popover-title').css('color', 'black');
+      $('.popover-title').css('color', '#333333');
     } else {
       $('.popover-title').html('Unknown location.').css('color', 'red');
     }

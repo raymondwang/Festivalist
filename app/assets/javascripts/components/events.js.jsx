@@ -80,15 +80,15 @@ class Venue extends React.Component {
       return <div className="venue">
         <a href={ url }>
           <span className="venue-location">{ venue.city }, { venue.region }</span>
-          <span className="venue-name">{ venue.name }</span>
         </a>
+          <span className="venue-name">{ venue.name }</span>
       </div>
     } else {
       return <div className="venue">
         <a href={ url }>
           <span className="venue-location">{ venue.city }, { venue.country }</span>
-          <span className="venue-name">{ venue.name }</span>
         </a>
+          <span className="venue-name">{ venue.name }</span>
       </div>
     }
   }

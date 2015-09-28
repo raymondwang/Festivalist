@@ -3,6 +3,8 @@ class MainController < ApplicationController
 
   require 'rspotify'
 
+  before_action :authenticate
+
   def index
   end
 
@@ -15,9 +17,9 @@ class MainController < ApplicationController
   end
 
   def events
+    current_user
     @playlist = RSpotify::Playlist.find(params[:owner_id], params[:id])
 
-    locate
     artists = []
     @playlist.tracks.each do |track|
       artists << track.artists.first.name
@@ -26,13 +28,20 @@ class MainController < ApplicationController
     @artists = artists.uniq
   end
 
+  def change_location
+    if current_user
+      @current_user.update(location: params[:location])
+    end
+
+    respond_to do |format|
+      format.text { head :no_content }
+    end
+  end
+
   private
 
-  def locate
-    @ip_address = request.remote_ip
-    if @ip_address == '::1' || @ip_address == '127.0.0.1'
-      @ip_address = '108.35.31.49' # localhost
-    end
+  def location_params
+
   end
 
 end

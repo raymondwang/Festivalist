@@ -16,6 +16,9 @@
           color: white;
           & > .playlist-name {
             font-size: 16px;
+            &:hover {
+              color: $logo-color;
+            }
           }
           & .playlist-owner {
             position: absolute;

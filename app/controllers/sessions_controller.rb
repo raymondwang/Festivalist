@@ -4,16 +4,14 @@ class SessionsController < ApplicationController
   require 'rspotify'
 
   def create
-    RSpotify.authenticate(ENV['SPOTIFY_KEY'], ENV['SPOTIFY_SECRET'])
-
+    authenticate
+    
     @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    spotify_hash = @spotify_user.to_hash
 
-    user = User.find_by(username: spotify_hash['id'])
-    if user
-      user.update(spotify_hash: spotify_hash)
-    else
-      user = User.create(username: spotify_hash['id'], spotify_hash: spotify_hash)
+    user = User.find_by(username: @spotify_user.id)
+
+    if !user
+      user = User.create(username: @spotify_user.id, location: locate)
     end
 
     session[:user_id] = user.id
@@ -24,6 +22,15 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_path
+  end
+
+  private
+
+  def locate
+    @location = request.remote_ip
+    if @location == '::1' || @location == '127.0.0.1'
+      @location = '72.229.28.185' # localhost
+    end
   end
 
 end

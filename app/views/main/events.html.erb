@@ -16,7 +16,7 @@
 </div>
 
 <div class="data">
-  <input type="hidden" id="user-location" value="<%= @ip_address %>">
+  <input type="hidden" id="user-location" value="<%= @current_user.location %>">
   <% @artists.each do |artist| %>
     <input type="hidden" class="artist-name" value="<%= artist %>" readonly>
   <% end %>

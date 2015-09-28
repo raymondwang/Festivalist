@@ -13,14 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150923201358) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "hstore"
-
   create_table "users", force: :cascade do |t|
     t.string   "username",     null: false
-    t.string   "ip_address"
-    t.hstore   "spotify_hash", null: false
+    t.text   "location"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

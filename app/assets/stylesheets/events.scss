@@ -11,7 +11,7 @@
     top: 5px;
     right: 0;
     cursor: pointer;
-    color: black;
+    color: #333333;
   }
   & > .popover {
     text-transform: none;
@@ -28,7 +28,9 @@
 }
 
 .hipster {
-  color: black;
+  & a {
+    color: #333333;
+  }
 }
 
 #events {
@@ -57,7 +59,7 @@
     & > .datetime {
       font-weight: 600;
       & > a:hover {
-        color: $brightred;
+        color: $logo-color;
       }
       & > a > .month {
         margin: 0;
@@ -73,7 +75,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       & > a:hover {
-        color: $brightred;
+        color: $logo-color;
       }
     }
 
@@ -82,7 +84,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       & > a:hover {
-        color: $brightred;
+        color: $logo-color;
       }
     }
 
@@ -137,7 +139,7 @@
           display: block;
           font-size: 24px;
         }
-        & > a > .venue-name {
+        & > .venue-name {
           font-size: 18px;
         }
       }
@@ -196,7 +198,7 @@
           display: block;
           font-size: 24px;
         }
-        & > a > .venue-name {
+        & > .venue-name {
           font-size: 18px;
         }
       }
