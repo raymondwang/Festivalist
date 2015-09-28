@@ -33,5 +33,3 @@ module Festivalist
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
-
-RSpotify.authenticate(ENV['SPOTIFY_KEY'], ENV['SPOTIFY_SECRET'])
