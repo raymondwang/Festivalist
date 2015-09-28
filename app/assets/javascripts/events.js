@@ -1,21 +1,18 @@
 $(document).ready(function() {
+  // now taking feedback on color schemes
+  $('body').css({'background': 'linear-gradient(90deg, #f857a6 10%, #ff5858 90%)'});
+
   var artists = getArtists();
   var promises = callBands(artists);
 
-  // to do: catch errors here
-  Promise.all(promises).then(function(results) {
-    // probably have to start keeping this to change location
-    $('.temp-data').remove();
-    var data = results[0];
-    for (var i = 1; i < results.length; i++) {
-      if (results[i].length > 0) {
-        $.merge(data, results[i]);
-      }
-    }
-    if (data.length < 1) {
-      noEvents();
-    } else {
-      createEvents(data);
+  renderPromises(promises);
+
+  enableLocationChange();
+
+  $('body').on('click', function (e) {
+    if ($(e.target).data('toggle') !== 'popover'
+      && $(e.target).parents('.popover.in').length === 0 && !($(e.target).hasClass('fa-map-marker'))) {
+      $('[data-toggle="popover"]').popover('hide');
     }
   });
 });
@@ -48,12 +45,69 @@ function callBands(artists) {
 
     artists[i] = artists[i].join('&artists[]=');
 
-    promises.push( $.ajax({
-      type: 'get',
-      dataType: 'jsonp',
-      url: call.concat('&artists[]=' + artists[i])
-    }) );
+    promises.push(new Promise(function (resolve) {
+      $.ajax({
+        type: 'get',
+        dataType: 'jsonp',
+        url: call.concat('&artists[]=' + artists[i])
+      }).then(resolve, function () {
+        resolve([]);
+      });
+    }));
   }
 
   return promises;
+}
+
+function renderPromises(promises) {
+  Promise.all(promises).then(function(results) {
+    var data = results[0];
+    for (var i = 1; i < results.length; i++) {
+      if (results[i].length > 0) {
+        $.merge(data, results[i]);
+      }
+    }
+    if (data.length < 1) {
+      noEvents();
+    } else {
+      createEvents(data);
+    }
+  });
+}
+
+function enableLocationChange() {
+  $('.location').popover().on('shown.bs.popover', function() {
+    enableAutocomplete();
+  });
+}
+
+function enableAutocomplete() {
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('location-input'), {types: ['(regions)']});
+
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    changeLocation(autocomplete);
+  });
+}
+
+function changeLocation(autocomplete) {
+  google.maps.event.clearInstanceListeners(autocomplete);
+  var region = $('#location-input').val();
+
+  var geocoder = new google.maps.Geocoder();
+
+  geocoder.geocode({'address': region}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      $('#user-location').val(results[0].geometry.location.H + ',' + results[0].geometry.location.L);
+
+      $('#events').empty();
+      $('#events').css('textAlign', 'center');
+      $('#events').append($('<i>').addClass('fa fa-circle-o-notch fa-spin fa-5x'));
+
+      renderPromises(callBands(getArtists()));
+
+      $('.popover-title').css('color', 'black');
+    } else {
+      $('.popover-title').html('Unknown location.').css('color', 'red');
+    }
+  });
 }

@@ -17,20 +17,22 @@ class MainController < ApplicationController
   def events
     @playlist = RSpotify::Playlist.find(params[:owner_id], params[:id])
 
+    locate
     artists = []
     @playlist.tracks.each do |track|
       artists << track.artists.first.name
     end
 
     @artists = artists.uniq
-
-    current_user
   end
 
   private
 
-  def getArtists
-
+  def locate
+    @ip_address = request.remote_ip
+    if @ip_address == '::1' || @ip_address == '127.0.0.1'
+      @ip_address = '108.35.31.49' # localhost
+    end
   end
 
 end

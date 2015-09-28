@@ -1,14 +1,26 @@
-<div class="temp-data">
-  <input type="hidden" id="user-location" value="<%= @current_user.ip_address %>">
-  <% @artists.each do |artist| %>
-    <input type="hidden" class="artist-name" value="<%= artist %>">
-  <% end %>
-</div>
-
-<h1 class="title events-title">Shows</h1>
+<h1 class="title events-title">Shows
+  <a class="location"
+     data-toggle="popover"
+     data-html="true"
+     title="Change Location"
+     data-content='<div class="form-group">
+                     <input type="text" class="form-control" id="location-input" size="50" placeholder="Location">
+                   </div>'
+     data-placement="left">
+    <i class="fa fa-map-marker"></i>
+  </a>
+</h1>
 
 <div id="events">
   <i class="fa fa-circle-o-notch fa-spin fa-5x"></i>
 </div>
 
+<div class="data">
+  <input type="hidden" id="user-location" value="<%= @ip_address %>">
+  <% @artists.each do |artist| %>
+    <input type="hidden" class="artist-name" value="<%= artist %>" readonly>
+  <% end %>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAPKEY']%>&libraries=places"></script>
 <%= javascript_include_tag 'events' %>

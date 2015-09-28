@@ -11,12 +11,11 @@ An app that checks for upcoming shows by artists featured in your Spotify playli
 * React
 * Spotify API
 * Bandsintown API
+* Google Places API
 * PostgreSQL
 * Sass
 * Bootstrap
 
 ### To do:
 
-* Enable location changing.
-* Error handling in promises.
-* Achieve a more consistent design.
+* Paginate of results

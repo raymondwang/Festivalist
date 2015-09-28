@@ -16,7 +16,7 @@ class Hipster extends React.Component {
     return <div className="hipster">
       <h2>Looks like you're a little too hipster for us!</h2>
       <h3>We couldn't find any upcoming shows for you.</h3>
-      <h3>Try changing your location, or <a href="/playlists">check another playlist?</a></h3>
+      <h3>Try changing your location, or <a href="/playlists">checking another playlist?</a></h3>
     </div>
   }
 }
@@ -67,7 +67,7 @@ class Artist extends React.Component {
           }
         })
       }
-      </div>
+    </div>
   }
 }
 
@@ -91,7 +91,6 @@ class Venue extends React.Component {
         </a>
       </div>
     }
-
   }
 }
 

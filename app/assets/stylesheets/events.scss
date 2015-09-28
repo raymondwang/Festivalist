@@ -4,10 +4,27 @@
   width: $default-width;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+
+  & > .location {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    cursor: pointer;
+    color: black;
+  }
+  & > .popover {
+    text-transform: none;
+    letter-spacing: normal;
+  }
 }
 
 .fa-spin {
   margin-top: 10vh;
+}
+
+.pac-container {
+  z-index: 1100;
 }
 
 .hipster {
