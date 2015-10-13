@@ -104,7 +104,7 @@ function changeLocation(autocomplete) {
 
   geocoder.geocode({'address': region}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
-      var location = results[0].geometry.location.H + ',' + results[0].geometry.location.L;
+      var location = results[0].geometry.location.lat() + ',' + results[0].geometry.location.lng();
 
       $.ajax({
         type: 'post',
