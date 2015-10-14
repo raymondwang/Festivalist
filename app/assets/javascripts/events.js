@@ -106,6 +106,8 @@ function changeLocation(autocomplete) {
     if (status === google.maps.GeocoderStatus.OK) {
       var location = results[0].geometry.location.lat() + ',' + results[0].geometry.location.lng();
 
+      // console.log(location);
+
       $.ajax({
         type: 'post',
         url: '/users/location',
